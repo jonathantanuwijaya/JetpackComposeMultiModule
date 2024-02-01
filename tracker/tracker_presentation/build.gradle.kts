@@ -3,7 +3,7 @@ plugins {
     `kotlin-android`
 }
 
-apply(from = "$rootDir/${Gradles.compose_module}")
+apply(from = "$rootDir/${Gradles.composeModule}")
 
 android {
     namespace = "com.learndev.tracker_presentation"

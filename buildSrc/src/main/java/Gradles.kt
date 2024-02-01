@@ -1,4 +1,4 @@
 object Gradles {
-    const val base_module = "base-module.gradle"
-    const val compose_module = "compose-module.gradle"
+    const val baseModule = "base-module.gradle"
+    const val composeModule = "compose-module.gradle"
 }
