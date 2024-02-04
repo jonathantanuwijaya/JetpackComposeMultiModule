@@ -25,7 +25,7 @@ fun UnitTextField(
     modifier: Modifier,
     textStyle: TextStyle = TextStyle(
         color = MaterialTheme.colors.primaryVariant,
-        fontSize = 17.sp
+        fontSize = 70.sp
     )
 ) {
     val spacing = LocalSpacing.current
@@ -36,6 +36,7 @@ fun UnitTextField(
             onValueChange = onValueChange,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             singleLine = true,
+            textStyle = textStyle,
             modifier = Modifier
                 .width(IntrinsicSize.Min)
                 .alignBy(LastBaseline)
