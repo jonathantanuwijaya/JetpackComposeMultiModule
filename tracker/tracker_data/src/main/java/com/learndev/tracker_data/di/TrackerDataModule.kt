@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.learndev.tracker_data.local.TrackerDatabase
 import com.learndev.tracker_data.remote.OpenFoodApi
 import com.learndev.tracker_data.repository.TrackerRepositoryImpl
+import com.learndev.tracker_domain.repository.TrackerRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -50,7 +51,7 @@ object TrackerDataModule {
     fun provideTrackerRepository(
         openFoodApi: OpenFoodApi,
         database: TrackerDatabase
-    ): TrackerRepositoryImpl {
+    ): TrackerRepository {
         return TrackerRepositoryImpl(api = openFoodApi, dao = database.trackerDao)
     }
 }
