@@ -80,7 +80,11 @@ fun SearchScreen(
             onValueChange = {
                 viewModel.onEvent(SearchEvent.OnQueryChange(it))
             },
-            onSearch = { viewModel.onEvent(SearchEvent.OnSearch) },
+            shouldShowHint = state.isHintVisible,
+            onSearch = {
+                keyboardController?.hide()
+                viewModel.onEvent(SearchEvent.OnSearch)
+            },
             onFocusChanged = { viewModel.onEvent(SearchEvent.OnSearchFocusChange(it.isFocused)) },
         )
         Spacer(modifier = Modifier.height(spacing.spaceMedium))
@@ -104,6 +108,7 @@ fun SearchScreen(
                         )
                     },
                     onTrack = {
+                        keyboardController?.hide()
                         viewModel.onEvent(
                             SearchEvent.OnTrackFoodClick(
                                 food = food.food,

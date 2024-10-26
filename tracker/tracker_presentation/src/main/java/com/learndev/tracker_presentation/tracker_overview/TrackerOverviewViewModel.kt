@@ -1,5 +1,7 @@
 package com.learndev.tracker_presentation.tracker_overview
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -33,6 +35,7 @@ class TrackerOverviewViewModel @Inject constructor(
     private var getFoodsForDateJob: Job? = null
 
     init {
+        refreshFoods()
         preferences.saveShouldShowOnBoarding(false)
     }
 

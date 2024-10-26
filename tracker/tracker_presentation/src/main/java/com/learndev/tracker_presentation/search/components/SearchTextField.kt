@@ -24,6 +24,7 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.learndev.core_ui.LocalSpacing
 import com.learndev.tracker_presentation.R
@@ -49,7 +50,9 @@ fun SearchTextField(
                 onSearch()
                 defaultKeyboardAction(ImeAction.Search)
             }),
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Search,
+            ),
             modifier = Modifier
                 .clip(RoundedCornerShape(5.dp))
                 .padding(2.dp)
