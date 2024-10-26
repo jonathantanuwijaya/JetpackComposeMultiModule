@@ -21,7 +21,15 @@ class TrackerRepositoryImpl(private val dao: TrackerDao, private val api: OpenFo
     ): Result<List<TrackableFood>> {
         return try {
             val searchDto = api.searchFood(query = query, page = page, pageSize = pageSize)
-            Result.success(searchDto.products.mapNotNull { it -> it.toTrackableFood() })
+            Result.success(searchDto.products  .filter {
+                val calculatedCalories =
+                    it.nutriments.carbohydrates100g * 4f +
+                            it.nutriments.proteins100g * 4f +
+                            it.nutriments.fat100g * 9f
+                val lowerBound = calculatedCalories * 0.99f
+                val upperBound = calculatedCalories * 1.01f
+                it.nutriments.energyKcal100g in (lowerBound..upperBound)
+            }.mapNotNull { it -> it.toTrackableFood() })
         } catch (e: Exception) {
             e.printStackTrace()
             Result.failure(e)

@@ -25,12 +25,15 @@ import com.learndev.tracker_presentation.R
 
 @Composable
 fun NutrientBarInfo(
-    value: Int, goal: Int, name: String, color: Color,
+    value: Int,
+    goal: Int,
+    name: String,
+    color: Color,
     modifier: Modifier = Modifier,
-    strokeWidth: Dp = 8.dp
+    strokeWidth: Dp = 8.dp,
 ) {
     val background = MaterialTheme.colors.background
-    val goalExceedColor = MaterialTheme.colors.error
+    val goalExceededColor = MaterialTheme.colors.error
     val angleRatio = remember {
         Animatable(0f)
     }
@@ -38,34 +41,43 @@ fun NutrientBarInfo(
         angleRatio.animateTo(
             targetValue = if (goal > 0) {
                 value / goal.toFloat()
-            } else
-                0f,
-            animationSpec = tween(durationMillis = 300)
-
+            } else 0f,
+            animationSpec = tween(
+                durationMillis = 300
+            )
         )
     }
-    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
         Canvas(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1f)
+                .aspectRatio(1f),
         ) {
             drawArc(
-                color = if (value <= goal)
-                    background else goalExceedColor,
+                color = if(value <= goal) background else goalExceededColor,
                 startAngle = 0f,
                 sweepAngle = 360f,
                 useCenter = false,
                 size = size,
-                style = Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Round)
+                style = Stroke(
+                    width = strokeWidth.toPx(),
+                    cap = StrokeCap.Round
+                )
             )
-            if (value <= goal) {
+            if(value <= goal) {
                 drawArc(
                     color = color,
                     startAngle = 90f,
                     sweepAngle = 360f * angleRatio.value,
                     useCenter = false,
-                    style = Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Round)
+                    size = size,
+                    style = Stroke(
+                        width = strokeWidth.toPx(),
+                        cap = StrokeCap.Round
+                    )
                 )
             }
         }
@@ -76,23 +88,19 @@ fun NutrientBarInfo(
             UnitDisplay(
                 amount = value,
                 unit = stringResource(id = R.string.grams),
-                amountColor = if (value <= goal) {
+                amountColor = if(value <= goal) {
                     MaterialTheme.colors.onPrimary
-                } else {
-                    goalExceedColor
-                },
-                unitColor = if (value <= goal) {
+                } else goalExceededColor,
+                unitColor = if(value <= goal) {
                     MaterialTheme.colors.onPrimary
-                } else {
-                    goalExceedColor
-                },
-
-                )
+                } else goalExceededColor
+            )
             Text(
-                text = name, color = if (value <= goal) {
+                text = name,
+                color = if(value <= goal) {
                     MaterialTheme.colors.onPrimary
-                } else
-                    goalExceedColor, style = MaterialTheme.typography.body1,
+                } else goalExceededColor,
+                style = MaterialTheme.typography.body1,
                 fontWeight = FontWeight.Light
             )
         }

@@ -28,14 +28,14 @@ import com.learndev.onboarding_presentation.components.SelectableButton
 
 @Composable
 fun ActivityScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     viewModel: ActivityViewModel = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
             when (event) {
-                is UiEvent.Navigate -> onNavigate(event)
+                is UiEvent.Success -> onNextClick()
                 else -> Unit
             }
         }
@@ -51,7 +51,7 @@ fun ActivityScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(id = R.string.whats_your_gender),
+                text = stringResource(id = R.string.whats_your_activity_level),
                 style = MaterialTheme.typography.h3
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
@@ -64,7 +64,6 @@ fun ActivityScreen(
                     onClick = {
                         viewModel.onActivitySelect(ActivityLevel.Low)
                     },
-                    modifier = Modifier,
                     textStyle = MaterialTheme.typography.button.copy(
                         fontWeight = FontWeight.Normal,
 

@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.learndev.core.domain.models.GoalType
 import com.learndev.core.domain.preferences.Preferences
-import com.learndev.core.navigation.Route
 import com.learndev.core.utils.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -30,7 +29,7 @@ class GoalViewModel @Inject constructor(private val preferences: Preferences):Vi
     fun onNextClick(){
         viewModelScope.launch {
             preferences.saveGoalType(selectedGoalType)
-            _uiEvent.send(UiEvent.Navigate(Route.NUTRIENT_GOAL))
+            _uiEvent.send(UiEvent.Success)
         }
 
     }

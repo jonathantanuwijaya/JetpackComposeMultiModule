@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.learndev.core.domain.preferences.Preferences
 import com.learndev.core.domain.usecases.FilterOutDigits
-import com.learndev.core.navigation.Route
 import com.learndev.core.utils.UiEvent
 import com.learndev.core.utils.UiText
 import com.learndev.onboarding_presentation.R
@@ -46,8 +45,8 @@ class HeightViewModel @Inject constructor(
                     )
                     return@launch
                 }
-            preferences.saveAge(heightNumber)
-            _uiEvent.send(UiEvent.Navigate(Route.WEIGHT))
+            preferences.saveHeight(heightNumber)
+            _uiEvent.send(UiEvent.Success)
         }
     }
 }

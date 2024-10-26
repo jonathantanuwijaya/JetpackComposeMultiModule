@@ -23,13 +23,13 @@ fun SelectableButton(
     isSelected: Boolean,
     color: Color,
     selectedTextColor: Color,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     textStyle: TextStyle = MaterialTheme.typography.button,
     onClick: () -> Unit
 ) {
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier
+        modifier = modifier
             .clip(RoundedCornerShape(100.dp))
             .border(width = 2.dp, color = color, shape = RoundedCornerShape(100.dp))
             .background(

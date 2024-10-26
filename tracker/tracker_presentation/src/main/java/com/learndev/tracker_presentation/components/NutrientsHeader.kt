@@ -28,19 +28,33 @@ import com.learndev.tracker_presentation.R
 import com.learndev.tracker_presentation.tracker_overview.TrackerOverviewState
 
 @Composable
-fun NutrientHeader(state: TrackerOverviewState, modifier: Modifier = Modifier) {
+fun NutrientsHeader(
+    state: TrackerOverviewState,
+    modifier: Modifier = Modifier
+) {
     val spacing = LocalSpacing.current
-    val animatedCalorieCount = animateIntAsState(targetValue = state.totalCalories)
+    val animatedCalorieCount = animateIntAsState(
+        targetValue = state.totalCalories
+    )
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(bottomStart = 50.dp, bottomEnd = 50.dp))
-            .background(
-                MaterialTheme.colors.primary
+            .clip(
+                RoundedCornerShape(
+                    bottomStart = 50.dp,
+                    bottomEnd = 50.dp
+                )
             )
-            .padding(horizontal = spacing.spaceLarge, vertical = spacing.spaceExtraLarge)
+            .background(MaterialTheme.colors.primary)
+            .padding(
+                horizontal = spacing.spaceLarge,
+                vertical = spacing.spaceExtraLarge
+            )
     ) {
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
             UnitDisplay(
                 amount = animatedCalorieCount.value,
                 unit = stringResource(id = R.string.kcal),
@@ -56,7 +70,7 @@ fun NutrientHeader(state: TrackerOverviewState, modifier: Modifier = Modifier) {
                     color = MaterialTheme.colors.onPrimary
                 )
                 UnitDisplay(
-                    amount = animatedCalorieCount.value,
+                    amount = state.caloriesGoal,
                     unit = stringResource(id = R.string.kcal),
                     amountColor = MaterialTheme.colors.onPrimary,
                     amountTextSize = 40.sp,
@@ -64,7 +78,6 @@ fun NutrientHeader(state: TrackerOverviewState, modifier: Modifier = Modifier) {
                 )
             }
         }
-
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
         NutrientsBar(
             carbs = state.totalCarbs,
