@@ -30,6 +30,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_18
         targetCompatibility = JavaVersion.VERSION_18
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
         jvmTarget = "18"
@@ -42,13 +43,18 @@ android {
     }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            resources.excludes.apply {
+                add("META-INF/*.md")
+                add("META-INF/*.properties")
+                add("META-INF/AL2.0")
+                add("META-INF/LGPL2.1")
+            }
         }
     }
 }
 
 dependencies {
-
+    coreLibraryDesugaring(Desugar.desugarJdk)
     implementation(Compose.compiler)
     implementation(Compose.ui)
     implementation(Compose.uiToolingPreview)

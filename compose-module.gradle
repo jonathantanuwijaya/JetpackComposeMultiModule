@@ -36,9 +36,17 @@ android {
     kotlinOptions {
         jvmTarget = '18'
     }
+    packagingOptions {
+        exclude 'META-INF/*.md'
+        exclude 'META-INF/*.properties'
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
 }
 
+
 dependencies {
+    coreLibraryDesugaring Desugar.desugarJdk
     implementation Compose.compiler
     implementation Compose.ui
     implementation Compose.uiToolingPreview
